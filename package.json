@@ -1,0 +1,83 @@
+{
+  "name": "Plannexe_Automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "cy:run": "cypress run",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "full-regression-headed-chrome": "cypress run --headed --browser chrome --spec 'cypress/e2e/*.feature'",
+    "merge-reports": "mochawesome-merge --reportDir cypress/reports --reportFile merged-report.json && marge --reportDir cypress/reports --reportFile report.html --reportTitle 'Cypress Test Report' --reportPageTitle 'Cypress Test Report'",
+    "generate-report": "npm run cy:run && npm run generate-cucumber-report",
+    "generate-cucumber-report": "node cucumber-html-report.js",
+    "generate-lighthouse-report": "npx cypress run --config-file=cypress.config.ts --env lighthouse=true --headed --spec 'cypress/e2e/performance.feature' && npm run generate-lighthouse-html",
+    "generate-lighthouse-html": "node generate-lighthouse-html.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "@cypress-audit/lighthouse": "^1.4.2",
+    "@cypress-audit/pa11y": "^1.4.2",
+    "@cypress/xpath": "^2.0.1",
+    "@types/node": "^22.5.1",
+    "auto-lighthouse": "^3.0.2",
+    "babel-loader": "^9.1.3",
+    "chai-http": "^5.0.0",
+    "chrome-launcher": "^1.1.2",
+    "chrome-remote-interface": "^0.33.2",
+    "cucumber-html-reporter": "^7.1.1",
+    "cypress": "^13.16.1",
+    "cypress-commands": "^3.0.0",
+    "cypress-downloadfile": "^1.2.4",
+    "cypress-failed-log": "^2.10.0",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-multi-reporters": "^1.6.4",
+    "cypress-plugin-tab": "^1.0.5",
+    "cypress-wait-until": "^3.0.2",
+    "cypress-web-vitals": "^4.1.2",
+    "esbuild-node-externals": "^1.14.0",
+    "fs-extra": "^11.2.0",
+    "lighthouse": "^8.6.0",
+    "lighthouse-parade": "^2.1.0",
+    "mocha": "^10.2.0",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "multiple-cucumber-html-reporter": "^3.6.2",
+    "path": "^0.12.7",
+    "report-generator": "^1.0.5",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "webpack": "^5.89.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/support/step_definitions/*.js",
+    "html": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-html/cucumber-report.html"
+    },
+    "messages": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-ndjson/cucumber-report.ndjson"
+    },
+    "json": {
+      "enabled": true,
+      "formatter": "cucumber-json-formatter",
+      "output": "cypress/reports/cucumber-json/cucumber-report.json"
+    }
+  },
+  "nonGlobalStepDefinitions": true,
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cypress-real-events": "^1.12.0",
+    "cypress-xpath": "^2.0.1",
+    "esbuild-node-externals": "^1.14.0",
+    "npm": "^10.8.1",
+    "pa11y": "^8.0.0",
+    "puppeteer": "^22.13.1",
+    "xlsx": "^0.18.5"
+  },
+  "downloadsFolder": "cypress/downloads",
+  "description": ""
+}
